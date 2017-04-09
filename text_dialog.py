@@ -1,5 +1,8 @@
+# Import tuxforms library
 import tuxforms
 
-tuxforms.textDialog("windowText", "windowName", 240, 240, "", "center")
+# Make text dialog
+tuxforms.textDialog("windowText", "windowName", 240, 240, "iconName", "center")
 
+# Show all windows
 tuxforms.ShowAll()

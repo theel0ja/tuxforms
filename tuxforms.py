@@ -24,7 +24,7 @@ def textDialog(text, title = "", width = 240, height = 240, dialogIcon = "", win
     win.connect("delete-event", Gtk.main_quit) # TODO do like vb6, ability to set "onDeleteEvent" etc...
     win.show_all()
 
-def aboutDialog(appName, description = "", title = "", website = "", icon = "", dialogIcon = "gtk-info", versionNumber = "", license = "", authors = [], documenters = ["bar"]): # TODO add gtk.AboutDialog.set_translator_credits?
+def aboutDialog(appName, description = "", title = "", website = "", icon = "", dialogIcon = "gtk-info", versionNumber = "", license = "", authors = [], documenters = []):
 
     # If license's type is 'list', for example if readlines is used
     if(type(license).__name__ == 'list'):
