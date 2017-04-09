@@ -19,18 +19,32 @@ def dialogWithText(text, title = "", ):
     win.connect("delete-event", Gtk.main_quit) # TODO do like vb6, ability to set "onDeleteEvent" etc...
     win.show_all()
 
-def aboutDialog(appName = "Application Name", description = "Description", title = "", website = "", icon = "", dialogIcon = "gtk-info", versionNumber = "", authors = ["foo"], documenters = ["foo"]): # TODO "About" -> "About " + appName ; TODO add gtk.AboutDialog.set_translator_credits?
-    #win = Gtk.AboutDialog(transient_for=self.window, modal=True) TODO carify what is "transient_for=self.window
+def aboutDialog(appName, description = "", title = "", website = "", icon = "", dialogIcon = "gtk-info", versionNumber = "", license = "", authors = [], documenters = ["bar"]): # TODO add gtk.AboutDialog.set_translator_credits?
+
+    # If license's type is 'list', for example if readlines is used
+    if(type(license).__name__ == 'list'):
+        newLicense = ""
+
+        for licenseLine in license:
+            newLicense += licenseLine
+
+        license = newLicense
+        del newLicense
+
+    #win = Gtk.AboutDialog(transient_for=self.window, modal=True) TODO clarify what is "transient_for=self.window
 
     win = Gtk.AboutDialog(modal=True)
 
     win.set_program_name(appName)
+
     if(description != ""):
         win.set_comments(description)
     if(title != ""):
         win.set_title(title) # If title is undefined, GTK uses "About - [Application Name]"
     if(dialogIcon != ""):
         win.set_icon_name(dialogIcon)
+    else:
+        win.set_icon_name("gtk-info")
     if(icon != ""):
         win.set_logo_icon_name(icon)
     if(website != ""):
@@ -38,20 +52,33 @@ def aboutDialog(appName = "Application Name", description = "Description", title
     if(versionNumber != ""):
         win.set_version(versionNumber)
 
+
+    hideAuthorsBtn = 1
+    # AUTHORS
     if(type(authors).__name__ == 'list' and authors):
         win.set_authors(authors)
-    else:
-        print "TODO" # TODO remove authors button
-        win.get_set_wrap_authors = True
+        hideAuthorsBtn = 0
+
+    # DOCUMENTERS
     if(type(documenters).__name__ == 'list' and documenters):
         win.set_documenters(documenters)
+        hideAuthorsBtn = 0
 
-    win.set_license("License text") # TODO fetch license text from somewhere
+    if(hideAuthorsBtn == 1):
+        print "TODO" # TODO remove authors button
 
-    def close(w, res):
+    # LICENSE
+    if(license != ""):
+        win.set_license(license)
+    else:
+        print "TODO" # TODO remove license button
+
+
+    # Handle close button and delete method (like from taskbar or window's X-button)
+    def closeWindow(w, res):
         if res == Gtk.ResponseType.CANCEL or res == Gtk.ResponseType.DELETE_EVENT:
             Gtk.main_quit()
-    win.connect("response", close)
+    win.connect("response", closeWindow)
     win.show_all()
 
 def ShowAll():
