@@ -1,5 +1,6 @@
 # tuxforms.py
-# https://github.com/TuxForms/ TODO
+# https://github.com/TuxForms/tuxforms
+# License: LGPL-3
 #
 # (C) Elias Ojala 2017
 #
@@ -8,13 +9,17 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-def dialogWithText(text, title = "", ):
-    print "Type of window: " + "dialogWithText"
-    print "Title: " + title
-    print "Text: " + text
+def textDialog(text, title = "", width = 240, height = 240, dialogIcon = "", windowPosition = "none"):
+    win = Gtk.Window(title=title, window_position=windowPosition)
+    
+    win.set_default_size(width, height)
+    if(dialogIcon != ""):
+        win.set_icon_name(dialogIcon)
 
-    win = Gtk.Window(title=title)
+    # Add text
     win.add( Gtk.Label(text) )
+
+
 
     win.connect("delete-event", Gtk.main_quit) # TODO do like vb6, ability to set "onDeleteEvent" etc...
     win.show_all()
