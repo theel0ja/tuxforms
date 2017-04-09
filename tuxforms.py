@@ -101,7 +101,7 @@ def selectFile(selectDirectories = False, multiple = False): # some of the featu
 	return fileName
 
 
-def fontChooser(title="fontChooser", windowPosition="center", width = 320, height = 320, dialogIcon = "helloworld"): # Todo
+def fontChooser(title="fontChooser", windowPosition="center", width = 320, height = 320, dialogIcon = "accessories-character-map"): # Todo
 	win = Gtk.FontChooserDialog(title=title, window_position=windowPosition)
 	
 	win.set_default_size(width, height)
@@ -136,8 +136,8 @@ def ShowAll():
 
 def Log(logLevel = "Unknown logLevel", logText = "Log Text is undefined"):
 	if(type(logLevel).__name__ == "str" and type(logText).__name__ == "str"):
-		if(type(logLevel):
-		print "TuxForms " + logLevel + " - " + logText
+		#if(type(logLevel)): #TODO
+			print "TuxForms " + logLevel + " - " + logText
 	else:
 		if(type(logLevel).__name__ != "str" and type(logText).__name__ == "str"): # logLevel is wrong
 			errorMsg = "logLevel isn't 'str'"
