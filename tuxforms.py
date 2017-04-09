@@ -22,7 +22,9 @@ def textDialog(text, title = "", width = 240, height = 240, dialogIcon = "", win
 
 
     win.connect("delete-event", Gtk.main_quit) # TODO do like vb6, ability to set "onDeleteEvent" etc...
-    win.show_all()
+    win.show_all() # TODO if some attribute is set, do not do this, do in tuxforms.UseWindow() :)
+
+    return win
 
 def aboutDialog(appName, description = "", title = "", website = "", icon = "", dialogIcon = "gtk-info", versionNumber = "", license = "", authors = [], documenters = []):
 
@@ -75,6 +77,7 @@ def aboutDialog(appName, description = "", title = "", website = "", icon = "", 
     # LICENSE
     if(license != ""):
         win.set_license(license)
+        win.set_wrap_license(True) # 
     else:
         print "TODO" # TODO remove license button
 
@@ -82,9 +85,26 @@ def aboutDialog(appName, description = "", title = "", website = "", icon = "", 
     # Handle close button and delete method (like from taskbar or window's X-button)
     def closeWindow(w, res):
         if res == Gtk.ResponseType.CANCEL or res == Gtk.ResponseType.DELETE_EVENT:
-            Gtk.main_quit()
+            Gtk.main_quit() #TODO
     win.connect("response", closeWindow)
+    win.show_all() # TODO if some attribute is set, do not do this, do in tuxforms.UseWindow() :)
+
+    return win
+
+def selectFile(selectDirectories = false, multiple = false): # some of the features of this: https://help.gnome.org/users/zenity/stable/file-selection.html.fi
+                                                             # (do not include --save, replace --separator with lists)
+                                                             # https://python-gtk-3-tutorial.readthedocs.io/en/latest/dialogs.html#filechooserdialog
+    
+
+    return fileName
+
+
+def fontChooser(): # Todo
+    print "Not implemented yet."
+
+def UseWindow(window):
     win.show_all()
+    # TODO prevent this to tuxforms.fileSelection()
 
 def ShowAll():
     Gtk.main()
