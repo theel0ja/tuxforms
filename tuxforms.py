@@ -13,7 +13,7 @@ from gi.repository import Gtk
 
 def textDialog(text, title = "", width = 240, height = 240, dialogIcon = "", windowPosition = "none"):
 	win = Gtk.Window(title=title, window_position=windowPosition)
-	
+		
 	win.set_default_size(width, height)
 	if(dialogIcon != ""):
 		win.set_icon_name(dialogIcon)
@@ -27,6 +27,20 @@ def textDialog(text, title = "", width = 240, height = 240, dialogIcon = "", win
 	win.show_all() # TODO if some attribute is set, do not do this, do in tuxforms.UseWindow() :)
 
 	return win
+
+def messageDialog(text, title = "", dialogIcon = "", windowPosition = "none", messageType="none"):
+	availableMessageTypes = ["none", "info", "warning", "error"]
+	
+	if messageType not in availableMessageTypes:
+		import tuxforms
+		tuxforms.Log("error", "Incorrect windowType")
+	else:
+		# TODO implement messageType
+		import tuxforms
+		tuxforms.Log("warning", "Unimplemented feature (messageDialog)")
+		
+		tuxforms.textDialog(text=messageType + " - " + text, title=title, dialogIcon=dialogIcon, windowPosition=windowPosition)
+		tuxforms.ShowAll()
 
 def aboutDialog(appName, description = "", title = "", website = "", icon = "", dialogIcon = "gtk-info", versionNumber = "", license = "", authors = [], documenters = []):
 
@@ -129,7 +143,9 @@ def fontChooser(title="fontChooser", windowPosition="center", width = 320, heigh
 		
 def UseWindow(window):
 	win.show_all()
-	# TODO prevent this to tuxforms.fileSelection() and tuxforms.fontChooser()
+	# TODO prevent this to tuxforms.fileSelection()
+	#    				   tuxforms.fontChooser() has prevention to it, because [window_object].destroy()
+
 
 def ShowAll():
 	Gtk.main()
@@ -137,7 +153,7 @@ def ShowAll():
 def Log(logLevel = "Unknown logLevel", logText = "Log Text is undefined"):
 	if(type(logLevel).__name__ == "str" and type(logText).__name__ == "str"):
 		#if(type(logLevel)): #TODO
-			print "TuxForms " + logLevel + " - " + logText
+		print "TuxForms " + logLevel + " - " + logText
 	else:
 		if(type(logLevel).__name__ != "str" and type(logText).__name__ == "str"): # logLevel is wrong
 			errorMsg = "logLevel isn't 'str'"

@@ -10,3 +10,6 @@ if(type(font).__name__ == "str"):
 	tuxforms.ShowAll()
 else:
 	tuxforms.Log("warning", "User closed dialog or clicked \"Close\" button")
+	
+	tuxforms.messageDialog(text="User closed dialog or clicked \"Close\" button", messageType="warning")
+	tuxforms.Showall()
